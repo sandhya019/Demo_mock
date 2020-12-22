@@ -19,17 +19,17 @@ pipeline {
             steps{
                 script{
                     pom = readMavenPom file: "pom.xml";
-                    nexusArtifactUploader artifacts: [[
+               	nexusArtifactUploader artifacts: [[
                     artifactId: pom.artifactId,
                     classifier: '',
                     file: "target/*-${pom.version}.jar",
                     type: 'jar']],
                     credentialsId: 'nexus3',
                     groupId: pom.groupId,
-                    nexusUrl: 'localhost:8081/',
+                    nexusUrl: 'localhost:8081',
                     nexusVersion: 'nexus3',
                     protocol: 'http',
-                    repository: NEXUS_REPOSITORY,
+                    repository: 'mock2_repo',
                     version: pom.version
                 }
             }
