@@ -19,7 +19,6 @@ pipeline {
             steps{
                 script{
                     pom = readMavenPom file: "pom.xml";
-                    nexusRepoName = mavenPom.version.endsWith("SNAPSHOT")?"maven-releases":"maven-releases";
                     nexusArtifactUploader artifacts: [[
                     artifactId: pom.artifactId,
                     classifier: '',
@@ -30,7 +29,7 @@ pipeline {
                     nexusUrl: 'localhost:8081/',
                     nexusVersion: 'nexus3',
                     protocol: 'http',
-                    repository: nexusRepoName,
+                    repository: NEXUS_REPOSITORY,
                     version: pom.version
                 }
             }
