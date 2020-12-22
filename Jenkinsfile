@@ -29,6 +29,6 @@ pipeline {
                     version: pom.version
                 }
             }
-        }s
+        }
     }
 }
