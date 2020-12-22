@@ -4,9 +4,6 @@ pipeline {
       maven 'Maven3'
     }
     
-     environment {
-         NEXUS_REPOSITORY = "maven-releases"
-     }
     stages{
         stage("Maven Build") {
             steps {
@@ -32,7 +29,7 @@ pipeline {
             }
         }
     }
-}
+
 
  post {
 	always {
@@ -43,3 +40,4 @@ pipeline {
         }
     }
  }
+}
