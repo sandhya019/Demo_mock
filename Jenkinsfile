@@ -3,6 +3,10 @@ pipeline {
     tools {
       maven 'Maven3'
     }
+    
+     environment {
+         NEXUS_REPOSITORY = "Demo_repo"
+    
     stages{
         stage("Maven Build") {
             steps {
@@ -25,7 +29,7 @@ pipeline {
                     nexusUrl: 'localhost:8081/',
                     nexusVersion: 'nexus3',
                     protocol: 'http',
-                    repository: Demo_repo,
+                    repository: NEXUS_REPOSITORY,
                     version: pom.version
                 }
             }
