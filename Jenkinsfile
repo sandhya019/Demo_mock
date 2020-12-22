@@ -36,3 +36,13 @@ pipeline {
         }
     }
 }
+
+ post {
+	always {
+		script {
+            emailext body: '<h4> ${currentBuild.currentResult}: </h4> Job: <h4> ${env.JOB_NAME}</h4> build: <h4>${env.BUILD_NUMBER}</h4>', 
+                subject: 'Build status', 
+                to: 'sandhyareddy019@gmail.com'
+        }
+    }
+ }
