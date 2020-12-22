@@ -17,21 +17,18 @@ pipeline {
         }
         stage('Upload jar to Nexus'){
             steps{
-                script{
-                    pom = readMavenPom file: "pom.xml";
                	nexusArtifactUploader artifacts: [[
-                    artifactId: pom.artifactId,
-                    classifier: '',
-                    file: "target/*-${pom.version}.jar",
-                    type: 'jar']],
-                    credentialsId: 'nexus3',
-                    groupId: pom.groupId,
-                    nexusUrl: 'localhost:8081',
-                    nexusVersion: 'nexus3',
-                    protocol: 'http',
-                    repository: 'mock2_repo',
-                    version: pom.version
-                }
+			artifactId: 'test2', 
+			classifier: '', 
+			file: 'target/test2-1.0.8.jar', 
+			type: 'jar']], 
+			credentialsId: 'Nexus_id', 
+			groupId: 'org.example', 
+			nexusUrl: 'localhost:8081', 
+			nexusVersion: 'nexus3', 
+			protocol: 'http', 
+			repository: 'mock2_repo', 
+			version: '1.0.8'
             }
         }
     }
