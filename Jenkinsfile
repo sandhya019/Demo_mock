@@ -5,7 +5,7 @@ pipeline {
     }
     
      environment {
-         NEXUS_REPOSITORY = "Demo_repo"
+         NEXUS_REPOSITORY = "maven-releases"
      }
     stages{
         stage("Maven Build") {
@@ -19,6 +19,7 @@ pipeline {
             steps{
                 script{
                     pom = readMavenPom file: "pom.xml";
+                    nexusRepoName = mavenPom.version.endsWith("SNAPSHOT")?"maven-releases":"maven-releases";
                     nexusArtifactUploader artifacts: [[
                     artifactId: pom.artifactId,
                     classifier: '',
@@ -29,7 +30,7 @@ pipeline {
                     nexusUrl: 'localhost:8081/',
                     nexusVersion: 'nexus3',
                     protocol: 'http',
-                    repository: NEXUS_REPOSITORY,
+                    repository: nexusRepoName,
                     version: pom.version
                 }
             }
