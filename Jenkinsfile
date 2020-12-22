@@ -6,7 +6,7 @@ pipeline {
     
      environment {
          NEXUS_REPOSITORY = "Demo_repo"
-    
+     }
     stages{
         stage("Maven Build") {
             steps {
