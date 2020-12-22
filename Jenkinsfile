@@ -18,7 +18,7 @@ pipeline {
                     nexusArtifactUploader artifacts: [[
                     artifactId: pom.artifactId,
                     classifier: '',
-                    file: "target/*-${mavenPom.version}.jar",
+                    file: "target/*-${pom.version}.jar",
                     type: 'jar']],
                     credentialsId: 'nexus3',
                     groupId: pom.groupId,
