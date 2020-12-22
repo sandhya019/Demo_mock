@@ -4,29 +4,31 @@ pipeline {
       maven 'Maven3'
     }
     stages{
-        stage('Build'){
-            steps{
-                sh script: 'mvn clean package'
+        stage("Maven Build") {
+            steps {
+                script {
+                    sh "mvn package -DskipTests=true"
+                }
             }
         }
         stage('Upload jar to Nexus'){
             steps{
                 script{
-                    def mavenPom = readMavenPom file:'pom.xml'
+                    pom = readMavenPom file: "pom.xml";
                     nexusArtifactUploader artifacts: [[
-                    artifactId: 'test2',
+                    artifactId: pom.artifactId,
                     classifier: '',
                     file: "target/*-${mavenPom.version}.jar",
                     type: 'jar']],
                     credentialsId: 'nexus3',
-                    groupId: 'org.example',
+                    groupId: pom.groupId,
                     nexusUrl: 'localhost:8081/',
                     nexusVersion: 'nexus3',
                     protocol: 'http',
                     repository: Demo_repo,
-                    version: "${mavenPom.version}"
+                    version: pom.version
                 }
             }
-        }
+        }s
     }
 }
